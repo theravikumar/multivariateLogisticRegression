@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import numpy as np
 from sklearn.model_selection import train_test_split
 import pandas as pd
-
-
-# In[39]:
-
 
 class LogisticRegression:
     def __init__ (self,lr=0.0001, itera=500000):
@@ -47,19 +40,8 @@ class LogisticRegression:
         return ((counter/len(Y_act))*100)
 
 
-# In[29]:
-
-
 df = pd.read_csv("/home/jarvis/python/sportscar_choice_long.csv")
 
-
-# In[9]:
-
-
-df.head()
-
-
-# In[10]:
 
 
 Convert = {'yes': 1,'no': 0}
@@ -67,7 +49,6 @@ Transe = {'manual':1,'auto':2}
 Segment = {'basic':1,'racer':2,'fun':3}
 
 
-# In[11]:
 
 
 df.convert = [Convert[item] for item in df.convert]
@@ -75,96 +56,38 @@ df.trans = [Transe[item] for item in df.trans]
 df.segment = [Segment[item] for item in df.segment]
 
 
-# In[12]:
 
-
-df.head()
-
-
-# In[13]:
 
 
 data = df.iloc[:,:].values
 
 
-# In[14]:
+
 
 
 np.random.shuffle(data)
-data[:5]
-
-
-# In[15]:
-
 
 n_trainData = data.shape[0] * 0.8
 X_train = data[:int(n_trainData),:-1]
-X_train.shape
-
-
-# In[16]:
-
-
-X_train[:5]
-
-
-# In[17]:
 
 
 X_test = data[int(n_trainData):,:-1]
-X_test.shape
 
-
-# In[18]:
-
-
-X_test[:5]
-
-
-# In[19]:
 
 
 Y_train = data[:int(n_trainData),-1]
-Y_train.shape
-
-
-# In[20]:
-
-
-Y_train[:5]
-
-
-# In[21]:
 
 
 Y_test = data[int(n_trainData):,-1]
-Y_test.shape
 
-
-# In[22]:
-
-
-Y_test[:5]
-
-
-# In[40]:
 
 
 regression = LogisticRegression()
 regression.fit(X_train,Y_train)
 Y_predicted = regression.predict(X_test)
 # print(Y_predicted)
-mse = regression.accuracy(Y_test,Y_predicted) 
-print(mse)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
+Accu = regression.accuracy(Y_test,Y_predicted) 
+print(Accu)
 
 
 
